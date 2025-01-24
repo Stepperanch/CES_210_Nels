@@ -1,6 +1,19 @@
 using System;
 
 
+// This program innitializes a Journal object
+// Starts while loop that displays a menu of options
+// user chooise to add entry, display entries, display entries from date, write to a CSV, fetch from a CSV file, or exit
+// the program calls methods on the Journal object according to the user's choice
+// Add entry - creates a new JournalEntry object, calls the WriteEntry method on the JournalEntry object, adds the entry to the Journal object
+// Give me a prompt - creates a new JournalPrompt object, calls the GivePrompt method on the JournalPrompt object, creates a new JournalEntry object, calls the WriteEntryFromPrompt method on the JournalEntry object, adds the entry to the Journal object
+// Display all entries - calls the Display method on the Journal object
+// Display entries from a specific date - prompts the user for a date, calls the DisplayDate method on the Journal object
+// Write entries to a CSV file - calls the WriteToCSVFile method on the Journal object
+// Fetch entries from a CSV file - calls the ReadFromCSVFile method on the Journal object
+// Exit - displays a goodbye message and exits the program
+
+
 class Program
 {
     static void Main(string[] args) 
