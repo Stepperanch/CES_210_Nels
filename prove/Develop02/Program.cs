@@ -69,3 +69,10 @@ class Program
         }
     }
 }
+
+// I exceded the reqirmement by 
+// Giving a option to Enter a entry withou prompt
+// Giving a option to Display entries from a specific date
+// Giveing each entry a title atribute
+// Gave the user a option to select a prompt from a certan catagory (Fun, Meaningful, Spiritual, Work)
+// Added a invalid choice message
