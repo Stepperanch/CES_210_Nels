@@ -5,6 +5,31 @@ using System;
 using System.Data.Common;
 using System.IO;
 
+// Class - JournalPrompt
+// _funPrompt: List<string> -> List of fun prompts
+// _meaningfullPrompt: List<string> -> List of meaningful prompts
+// _spiritualPrompt: List<string> -> List of spiritual prompts
+// _workPrompt: List<string> -> List of work prompts
+
+// FetchPrompt(category: string, index: int) -> string -> Takes a category and index and returns a prompt
+// GivePrompt() -> string -> Gives a random prompt
+
+// Class - JournalEntry
+// _entry: string -> Entry text
+// _date: string -> Date of entry
+// _title: string -> Title of entry
+
+// WriteEntry() -> void -> Writes an entry
+// WriteEntryFromPrompt(prompt: string) -> void -> Writes an entry from a prompt
+
+// Class - Journal
+// _entries: List<JournalEntry> -> List of journal entries
+// AddEntry(entry: JournalEntry) -> void -> Adds an entry to the journal
+// Display() -> void -> Displays all entries
+// DisplayDate(date: string) -> void -> Displays entries from a specific date
+// WriteToCSVFile() -> void -> Writes entries to a CSV file
+// ReadFromCSVFile() -> void -> Reads entries from a CSV file
+
 
 public class JournalPrompt
 {
@@ -112,7 +137,7 @@ public class JournalEntry
     {
         _entry = "";
         _title = "";
-        _date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        _date = DateTime.Now.ToString("yy-MM-dd");
     }
     public string _entry;
     public string _date;
@@ -162,6 +187,7 @@ public class Journal
             if (entry._date == date)
             {
                 Console.WriteLine(entry._date);
+                Console.WriteLine(entry._title);
                 Console.WriteLine(entry._entry);
             }
             else
@@ -183,7 +209,7 @@ public class Journal
         {
             foreach (JournalEntry entry in _entries)
             {
-                writer.WriteLine(entry._date + "~|~" + entry._entry);
+                writer.WriteLine(entry._date + "~|~" + entry._title + "~|~" + entry._entry);
             }
         }
     }
@@ -208,7 +234,8 @@ public class Journal
                     string[] entry = line.Split("~|~");
                     JournalEntry newEntry = new JournalEntry();
                     newEntry._date = entry[0];
-                    newEntry._entry = entry[1];
+                    newEntry._title = entry[1];
+                    newEntry._entry = entry[2];
                     _entries.Add(newEntry);
                 }
             }
