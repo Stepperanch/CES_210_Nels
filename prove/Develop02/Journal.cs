@@ -226,10 +226,9 @@ public class Journal
         {
             _entries.Clear();
             string line = "";
-            while (line != null)
+            while ((line = reader.ReadLine()) != null)
             {
-                line = reader.ReadLine();
-                if (line != null)
+                if (!string.IsNullOrWhiteSpace(line))
                 {
                     string[] entry = line.Split("~|~");
                     JournalEntry newEntry = new JournalEntry();
