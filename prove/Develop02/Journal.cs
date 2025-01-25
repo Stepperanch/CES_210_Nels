@@ -33,9 +33,9 @@ using System.IO;
 
 public class JournalPrompt
 {
-    public JournalPrompt()
+    public JournalPrompt() // Constructor
     {
-        _funPrompt = new List<string>();
+        _funPrompt = new List<string>();  // Initialize fun prompts
         _funPrompt.Add("What is the funniest thing that happened to you today?");
         _funPrompt.Add("What is the most exciting thing that happened to you today?");
         _funPrompt.Add("What is a pretty sight you saw today?");
@@ -43,7 +43,7 @@ public class JournalPrompt
         _funPrompt.Add("What is a nice smell you smelled today?");
         _funPrompt.Add("What is a delicious taste you tasted today?");
         _funPrompt.Add("What is a nice thing you felt today?");
-        _meaningfullPrompt = new List<string>();
+        _meaningfullPrompt = new List<string>();    // Initialize meaningful prompts
         _meaningfullPrompt.Add("What is the most meaningful thing that happened to you today?");
         _meaningfullPrompt.Add("What is the most important thing you learned today?");
         _meaningfullPrompt.Add("What is the most important thing you did today?");
@@ -51,7 +51,7 @@ public class JournalPrompt
         _meaningfullPrompt.Add("What is the most important thing you felt today?");
         _meaningfullPrompt.Add("What is the most important thing you heard today?");
         _meaningfullPrompt.Add("What is the most important thing you saw today?");
-        _spiritualPrompt = new List<string>();
+        _spiritualPrompt = new List<string>();  // Initialize spiritual prompts
         _spiritualPrompt.Add("What is the most spiritual thing that happened to you today?");
         _spiritualPrompt.Add("What is the most spiritual thing you learned today?");
         _spiritualPrompt.Add("What is the most spiritual thing you did today?");
@@ -59,16 +59,16 @@ public class JournalPrompt
         _spiritualPrompt.Add("What is the most spiritual thing you felt today?");
         _spiritualPrompt.Add("What is the most spiritual thing you heard today?");
         _spiritualPrompt.Add("What is the most spiritual thing you saw today?");
-        _workPrompt = new List<string>();
+        _workPrompt = new List<string>();   // Initialize work prompts
         _workPrompt.Add("What is the biggest problem you solved today?");
         _workPrompt.Add("When was is the time you felt the most productive today?");
     }
-    public List<string> _funPrompt;
-    public List<string> _meaningfullPrompt;
-    public List<string> _spiritualPrompt;
-    public List<string> _workPrompt;  
+    public List<string> _funPrompt; // List of fun prompts
+    public List<string> _meaningfullPrompt; // List of meaningful prompts
+    public List<string> _spiritualPrompt;   // List of spiritual prompts
+    public List<string> _workPrompt;    // List of work prompts
 
-    public string FetchPrompt(string category, int index)
+    public string FetchPrompt(string category, int index)   // Fetches a prompt based on category and index
     {
         if (category == "1")
         {
@@ -92,13 +92,13 @@ public class JournalPrompt
         }
     }
     
-    public string GivePrompt()
+    public string GivePrompt()  // Gives a random prompt
     {
-        Console.WriteLine("Choose a prompt category: Fun(1), Meaningful(2), Spiritual(3), Work(4)");
-        string category = Console.ReadLine();
-        Random random = new Random();
-        int index;
-        string prompt = "Invalid input please try again";
+        Console.WriteLine("Choose a prompt category: Fun(1), Meaningful(2), Spiritual(3), Work(4)");    // Prompt the user to choose a category
+        string category = Console.ReadLine();   // Get the category from the user
+        Random random = new Random();   // Create a new random object
+        int index;  // Initialize index
+        string prompt = "Invalid input please try again";   // Initialize prompt
         if (category == "1")
         {
             index = random.Next(_funPrompt.Count);
@@ -121,58 +121,58 @@ public class JournalPrompt
         }
         else
         {
-            Console.WriteLine(prompt);
-            return GivePrompt();
+            Console.WriteLine(prompt);  // If the category is invalid print the Invalid input message
+            return GivePrompt();        // Call the GivePrompt method again
         }
         
-        Console.WriteLine(prompt);
-        return prompt;
+        Console.WriteLine(prompt);  // Print the prompt
+        return prompt;  // Return the prompt
     }
 
 }
 
-public class JournalEntry
+public class JournalEntry   // JournalEntry class
 {
-    public JournalEntry()
+    public JournalEntry()   // Constructor
     {
-        _entry = "";
-        _title = "";
-        _date = DateTime.Now.ToString("yy-MM-dd");
+        _entry = "";    // Initialize entry
+        _title = "";    // Initialize title
+        _date = DateTime.Now.ToString("yy-MM-dd");      // Initialize date
     }
-    public string _entry;
-    public string _date;
+    public string _entry;   // Entry text
+    public string _date;    // Date of entry
     public string _title; // if prompt is used prompt will be the title
-    public void WriteEntry()
+    public void WriteEntry()    // WriteEntry method
     {
-        Console.WriteLine("What is the title of your entry?");
-        _title = Console.ReadLine();
+        Console.WriteLine("What is the title of your entry?");  
+        _title = Console.ReadLine();    // Get the title from the user
         Console.WriteLine("What is your entry?");
-        _entry = Console.ReadLine();
+        _entry = Console.ReadLine();    // Get the entry from the user
     }
     public void WriteEntryFromPrompt(string prompt)
     {
-        _title = prompt;
+        _title = prompt;    // Set the title to the prompt
         Console.WriteLine("What is your entry?");
-        _entry = Console.ReadLine();
+        _entry = Console.ReadLine();    // Get the entry from the user
     }
 }
 
-public class Journal
+public class Journal    // Journal class
 {
-    public Journal()
+    public Journal()    // Constructor
     {
-        _entries = new List<JournalEntry>();
+        _entries = new List<JournalEntry>();    // Initialize entries
     }
-    public List<JournalEntry> _entries;
+    public List<JournalEntry> _entries; // List of journal entries
 
-    public void AddEntry(JournalEntry entry)
+    public void AddEntry(JournalEntry entry)   // AddEntry method
     {
-        _entries.Add(entry);
+        _entries.Add(entry);    // Add the entry to the list
     }
 
-    public void Display()
+    public void Display()   // Display method
     {
-        foreach (JournalEntry entry in _entries)
+        foreach (JournalEntry entry in _entries)    // Loop through all entries
         {
             Console.WriteLine(entry._date);
             Console.WriteLine(entry._title);
@@ -180,11 +180,11 @@ public class Journal
         }
     }
 
-    public void DisplayDate(string date)
+    public void DisplayDate(string date)    // DisplayDate method
     {
-        foreach (JournalEntry entry in _entries)
+        foreach (JournalEntry entry in _entries)    // Loop through all entries
         {
-            if (entry._date == date)
+            if (entry._date == date)    // If the entry date matches the given date print the entry
             {
                 Console.WriteLine(entry._date);
                 Console.WriteLine(entry._title);
@@ -192,41 +192,42 @@ public class Journal
             }
             else
             {
-                Console.WriteLine("No entries found for that date");
+                Console.WriteLine("No entries found for that date");    // If no entries are found print a message
             }
         }
     }
 
-    public void WriteToCSVFile()
+    public void WriteToCSVFile()    // WriteToCSVFile method
+    
     {
-        Console.WriteLine("What is the name of the file you want to write to? (default: journal.csv)");
-        string fileName = Console.ReadLine();
-        if (fileName == "")
+        Console.WriteLine("What is the name of the file you want to write to? (default: journal.csv)");   // Prompt the user for a file name
+        string fileName = Console.ReadLine();   // Get the file name from the user
+        if (fileName == "")  // If the file name is empty set it to journal.csv
         {
             fileName = "journal.csv";
         }
-        using (StreamWriter writer = new StreamWriter(fileName))
+        using (StreamWriter writer = new StreamWriter(fileName))    // Create a new StreamWriter object
         {
-            foreach (JournalEntry entry in _entries)
+            foreach (JournalEntry entry in _entries) // Loop through all entries
             {
-                writer.WriteLine(entry._date + "~|~" + entry._title + "~|~" + entry._entry);
+                writer.WriteLine(entry._date + "~|~" + entry._title + "~|~" + entry._entry);    // Write the entry to the file
             }
         }
     }
 
-    public void ReadFromCSVFile()
+    public void ReadFromCSVFile()   // ReadFromCSVFile method
     {
-        Console.WriteLine("What is the name of the file you want to read from? (default: journal.csv)");
-        string fileName = Console.ReadLine();
-        if (fileName == "")
+        Console.WriteLine("What is the name of the file you want to read from? (default: journal.csv)");    // Prompt the user for a file name
+        string fileName = Console.ReadLine();   // Get the file name from the user
+        if (fileName == "") // If the file name is empty set it to journal.csv
         {
             fileName = "journal.csv";
         }
-        using (StreamReader reader = new StreamReader(fileName))
+        using (StreamReader reader = new StreamReader(fileName))    // Create a new StreamReader object
         {
-            _entries.Clear();
-            string line = "";
-            while ((line = reader.ReadLine()) != null)
+            _entries.Clear();   // Clear the entries list
+            string line = "";   // Initialize line
+            while ((line = reader.ReadLine()) != null)  //
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
