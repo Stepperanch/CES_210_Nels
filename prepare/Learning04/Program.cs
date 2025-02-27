@@ -22,5 +22,6 @@ class Program
 
         Console.WriteLine("\nPress any key to exit...");
         Console.ReadKey();
+        Console.Write("\b \b");
     }
 }
