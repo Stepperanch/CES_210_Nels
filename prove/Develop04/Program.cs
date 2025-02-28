@@ -74,3 +74,8 @@ class Program
         Main(args);
     }
 }
+
+// I went above and beond by
+// adding a new activity to the program that inherited atributes from the breathing program
+// giving the user options to the pase of their breathing activity
+// preventing the same question to be asked twice in a row in the reflection activity
