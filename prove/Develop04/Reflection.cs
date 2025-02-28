@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 public class ReflectionActivity : Activity
 {
-    private List<string> _question1;
-    private List<string> _question2;
+    private List<string> _question1 = new List<string>();
+    private List<string> _question2 = new List<string>();
 
     public ReflectionActivity(int time)
     {
@@ -9,13 +11,11 @@ public class ReflectionActivity : Activity
         _time = time;
         _description = "A reflection exercise to help you relax. \nThis exercise will prompt you to reflect on your life and answer some questions.";
         MakeQuestions();
+        Console.Clear();
     }
 
     private void MakeQuestions()
     {
-        _question1 = new List<string>();
-        _question2 = new List<string>();
-
         _question1.Add("Think of a time when you did something really difficult.");
         _question1.Add("Think of a time when you helped someone in need.");
         _question1.Add("Think of a time when you did something truly selfless.");
@@ -44,32 +44,28 @@ public class ReflectionActivity : Activity
     {
         Random random = new Random();
         int newindex = random.Next(0, _question1.Count);
-            if (newindex == usedIndex[0] || newindex == usedIndex[1] || newindex == usedIndex[2])
-            {
-                return SetIndex(usedIndex);
-            }
-            else
-            {
-                usedIndex.Add(newindex);
-                usedIndex.RemoveAt(0);
-                return newindex;
-            }
+        if (newindex == usedIndex[0] || newindex == usedIndex[1] || newindex == usedIndex[2])
+        {
+            return SetIndex(usedIndex);
+        }
+        else
+        {
+            usedIndex.Add(newindex);
+            usedIndex.RemoveAt(0);
+            return newindex;
+        }
     }
     private void ReflectionCycle()
     {   
         int index = -1;
         List<int> usedIndex = new List<int>();
-        usedIndex.Add(-1);
-        usedIndex.Add(-1);
-        usedIndex.Add(-1);
-
-        DateTime end = DateTime.Now.AddSeconds(_time);
-        while (true)
+        for (int i = 0; i < (_question1.Count-1); i++)
         {
-            if (DateTime.Now >= end)
-                {
-                    break;
-                }
+            usedIndex.Add(-1);
+        }
+        DateTime end = DateTime.Now.AddSeconds(_time);
+        while (DateTime.Now < end)
+        {
             Console.Clear();
             index = SetIndex(usedIndex); 
             Console.WriteLine(_question1[index]);
@@ -79,7 +75,7 @@ public class ReflectionActivity : Activity
             foreach (string question in _question2)
             {
                 Console.WriteLine(question);
-                Animation(0);
+                Animation(5);
                 if (DateTime.Now >= end)
                 {
                     break;

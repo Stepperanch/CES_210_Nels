@@ -31,16 +31,22 @@ public class BreathingActivity : Activity
     {
         _title = "Breathing";
         _time = time;
-        Console.WriteLine("How Long would you like to breathe in for?");
-        _inTime = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("How Long would you like to breathe out for?");
-        _outTime = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("How Long would you like to breathe in for? (default 5)");
+        if (!int.TryParse(Console.ReadLine(), out _inTime))
+        {
+            _inTime = 5;
+        }
+        Console.WriteLine("How Long would you like to breathe out for? (default 5)");
+        if (!int.TryParse(Console.ReadLine(), out _outTime))
+        {
+            _outTime = 5;
+        }
         _description = $"A breathing exercise to help you relax. \nThis exercise will prompt you to breathe in for {_inTime} seconds and breathe out for {_outTime} seconds.";
     }
 
     public void Start()
     {
-        Console.Clear();
+        
         StartActivity();
         BreatheCycle();
         EndingMessage();
