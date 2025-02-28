@@ -40,13 +40,13 @@ public class ReflectionActivity : Activity
         EndingMessage();
     }
 
-    private void SetIndex(List<int> usedIndex)
+    private int SetIndex(List<int> usedIndex)
     {
         Random random = new Random();
         int newindex = random.Next(0, _question1.Count);
             if (newindex == usedIndex[0] || newindex == usedIndex[1] || newindex == usedIndex[2])
             {
-                SetIndex(usedIndex);
+                return SetIndex(usedIndex);
             }
             else
             {
@@ -62,10 +62,14 @@ public class ReflectionActivity : Activity
         usedIndex.Add(-1);
         usedIndex.Add(-1);
         usedIndex.Add(-1);
-        string bigQuestion = "";
+
         DateTime end = DateTime.Now.AddSeconds(_time);
         while (true)
         {
+            if (DateTime.Now >= end)
+                {
+                    break;
+                }
             Console.Clear();
             index = SetIndex(usedIndex); 
             Console.WriteLine(_question1[index]);
