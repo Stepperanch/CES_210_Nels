@@ -31,12 +31,12 @@ public class BreathingActivity : Activity
     {
         _title = "Breathing";
         _time = time;
-        Console.WriteLine("How Long would you like to breathe in for? (default 5)");
+        Console.WriteLine("How Long would you like to breathe in for? (default 5 seconds)");
         if (!int.TryParse(Console.ReadLine(), out _inTime))
         {
             _inTime = 5;
         }
-        Console.WriteLine("How Long would you like to breathe out for? (default 5)");
+        Console.WriteLine("How Long would you like to breathe out for? (default 5 seconds)");
         if (!int.TryParse(Console.ReadLine(), out _outTime))
         {
             _outTime = 5;

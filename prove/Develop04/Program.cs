@@ -36,7 +36,7 @@ class Program
             Main(args);
         }
 
-        Console.WriteLine("How long would you like to participate in this activity? (default 30)");
+        Console.WriteLine("How long would you like to participate in this activity? (default 30 seconds)");
         int time;
         if (!int.TryParse(Console.ReadLine(), out time))
         {

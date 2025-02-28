@@ -25,7 +25,7 @@ public class BoxBreathing : BreathingActivity
     {
         _title = "Box Breathing";
         _time = time;
-        Console.WriteLine("How Long would you like to hold your breath for? (default 5)");
+        Console.WriteLine("How Long would you like to hold your breath for? (default 5 seconds)");
         if (!int.TryParse(Console.ReadLine(), out _holdTime))
         {
             _holdTime = 5;
