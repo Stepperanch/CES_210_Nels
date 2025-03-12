@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop05 World!");
+        BasicGoal goal = new BasicGoal("Complete CES 210", 10);
+        goal.DisplayGoal();
+        Console.WriteLine($"Goal is complete: {goal.CheckGoal()}");
     }
 }
