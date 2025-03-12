@@ -1,44 +1,33 @@
 using System.Diagnostics.Tracing;
+using System.Net;
 
 public class Goal
 {
     protected string _content;
     protected DateTime _endDate;
     protected int _points;
+    protected bool _repeating;
+    protected int _timesCompleted=0;
 
-    protected Goal(string content, int days, int points)
-    {
-        _content = content;
-        _endDate = DateTime.Now.AddDays(days);
-        _points = points;
-    }
-
-    protected Goal(string content, DateTime endDate, int points)
+    protected Goal(string content, int points, bool repeating, DateTime endDate)
     {
         _content = content;
         _endDate = endDate;
         _points = points;
+        _repeating = repeating;
     }
 
-    protected Goal(string content, int points)
+
+    public virtual (int points, bool end) CheckGoal()
     {
-        _content = content;
-        _endDate = DateTime.MinValue;
-        _points = points;
+        bool continue_goal = _repeating && DateTime.Now < _endDate;
+        _timesCompleted++;
+        return (_points, continue_goal);
     }
 
-    public (int points, bool end) CheckGoal()
-    {
-        return (_points, DateTime.Now > _endDate);
-    }
-
-    public void DisplayGoal()
+    public virtual void DisplayGoal()
     {
         Console.WriteLine($"Content: {_content}");
-        if (_endDate != DateTime.MinValue)
-        {
-            Console.WriteLine($"End Date: {_endDate}");
-        }
         Console.WriteLine($"Points: {_points}");
     }
 }
