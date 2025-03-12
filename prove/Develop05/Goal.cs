@@ -1,4 +1,5 @@
 using System.Diagnostics.Tracing;
+using System.Dynamic;
 using System.Net;
 
 public class Goal
@@ -7,7 +8,9 @@ public class Goal
     protected DateTime _endDate;
     protected int _points;
     protected bool _repeating;
-    protected int _timesCompleted=0;
+    protected int _timesCompleted = 0;
+    protected int _maxTimes = 0;
+    protected int _finalPoints = 0;
 
     protected Goal(string content, int points, bool repeating, DateTime endDate)
     {
@@ -16,7 +19,14 @@ public class Goal
         _points = points;
         _repeating = repeating;
     }
-
+    public string GetGoalLine()
+    {
+        return _content + ", " + _points + " points";
+    }
+    public string Serialize()
+    {
+        return $"{GetType().Name}|{_content}|{_points}|{_repeating}|{_endDate}|{_timesCompleted}|{_maxTimes}|{_finalPoints}";
+    }
 
     public virtual (int points, bool end) CheckGoal()
     {

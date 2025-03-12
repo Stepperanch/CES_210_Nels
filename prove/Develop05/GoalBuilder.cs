@@ -82,9 +82,6 @@ public class GoalBuilder
             }
             else if (choice == 5)
             {
-                Console.WriteLine("Enter the number of times the goal must be completed:");
-                _times = Convert.ToInt32(Console.ReadLine());
-
                 return new TimeBoundRepeatingGoal(_content, _points, _endDate);
             }
             else
@@ -97,5 +94,9 @@ public class GoalBuilder
             }    
         }
         return null;
+    }
+    public Goal Deserialize(string line)
+    {
+        
     }
 }

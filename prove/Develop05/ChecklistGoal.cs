@@ -1,7 +1,5 @@
 public class ChecklistGoal : Goal
 {
-    protected int _maxTimes;
-    protected int _finalPoints;
 
     public ChecklistGoal(string content, int points, int finalPoints, int times, DateTime endDate = default(DateTime)) : base(content, points, false, endDate)
     {
