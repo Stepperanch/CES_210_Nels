@@ -97,6 +97,43 @@ public class GoalBuilder
     }
     public Goal Deserialize(string line)
     {
-        
+        string[] parts = line.Split('|');
+        string type = parts[0];
+        string content = parts[1];
+        int points = Convert.ToInt32(parts[2]);
+        bool repeating = Convert.ToBoolean(parts[3]);
+        DateTime endDate = Convert.ToDateTime(parts[4]);
+        int timesCompleted = Convert.ToInt32(parts[5]);
+        int maxTimes = Convert.ToInt32(parts[6]);
+        int finalPoints = Convert.ToInt32(parts[7]);
+        if (type == "BasicGoal")
+        {
+            return new BasicGoal(content, points);
+        }
+        else if (type == "EternalGoal")
+        {
+            return new EternalGoal(content, points);
+        }
+        else if (type == "ChecklistGoal")
+        {
+            return new ChecklistGoal(content, points, finalPoints, maxTimes);
+        }
+        else if (type == "TimeBoundBasicGoal")
+        {
+            return new TimeBoundBasicGoal(content, points, endDate);
+        }
+        else if (type == "TimeBoundRepeatingGoal")
+        {
+            return new TimeBoundRepeatingGoal(content, points, endDate);
+        }
+        else if (type == "TimeBoundChecklistGoal")
+        {
+            return new TimeBoundChecklistGoal(content, points, finalPoints, maxTimes, endDate);
+        }
+        return null;
+    }
+    public string Serialize(Goal goal)
+    {
+        return goal.Serialize();
     }
 }

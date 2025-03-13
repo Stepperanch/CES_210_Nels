@@ -30,9 +30,9 @@ public class Goal
 
     public virtual (int points, bool end) CheckGoal()
     {
-        bool continue_goal = _repeating && DateTime.Now < _endDate;
+        bool _continuegoal = _repeating && DateTime.Now < _endDate;
         _timesCompleted++;
-        return (_points, continue_goal);
+        return (_points, _continuegoal);
     }
 
     public virtual void DisplayGoal()
