@@ -12,8 +12,10 @@ public class GoalManager
     {
         for (int i = 0; i < _goals.Count; i++)
         {
+            Console.WriteLine("");
             _goals[i].DisplayGoal();
         }
+        Console.WriteLine("");
     }
     private void CheckOffGoal()
     {

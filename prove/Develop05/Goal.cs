@@ -12,12 +12,13 @@ public class Goal
     protected int _maxTimes = 0;
     protected int _finalPoints = 0;
 
-    protected Goal(string content, int points, bool repeating, DateTime endDate)
+    protected Goal(string content, int points, bool repeating, int timesCompleted, DateTime endDate)
     {
         _content = content;
         _endDate = endDate;
         _points = points;
         _repeating = repeating;
+        _timesCompleted = timesCompleted;
     }
     public string GetGoalLine()
     {
@@ -28,7 +29,7 @@ public class Goal
         return $"{GetType().Name}|{_content}|{_points}|{_repeating}|{_endDate}|{_timesCompleted}|{_maxTimes}|{_finalPoints}";
     }
 
-    public virtual (int points, bool end) CheckGoal()
+    public virtual (int points, bool end ) CheckGoal()
     {
         bool _continuegoal = _repeating && DateTime.Now < _endDate;
         _timesCompleted++;

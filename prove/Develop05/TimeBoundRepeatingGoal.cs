@@ -1,6 +1,6 @@
 public class TimeBoundRepeatingGoal : Goal
 {
-    public TimeBoundRepeatingGoal(string content, int points, DateTime endDate) : base(content, points, true, endDate)
+    public TimeBoundRepeatingGoal(string content, int points, DateTime endDate, int timesCompleated = 0) : base(content, points, true, timesCompleated, endDate)
     {
     }
 

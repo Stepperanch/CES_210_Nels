@@ -112,11 +112,11 @@ public class GoalBuilder
         }
         else if (type == "EternalGoal")
         {
-            return new EternalGoal(content, points);
+            return new EternalGoal(content, points, timesCompleted);
         }
         else if (type == "ChecklistGoal")
         {
-            return new ChecklistGoal(content, points, finalPoints, maxTimes);
+            return new ChecklistGoal(content, points, finalPoints, maxTimes, timesCompleted);
         }
         else if (type == "TimeBoundBasicGoal")
         {
@@ -124,11 +124,11 @@ public class GoalBuilder
         }
         else if (type == "TimeBoundRepeatingGoal")
         {
-            return new TimeBoundRepeatingGoal(content, points, endDate);
+            return new TimeBoundRepeatingGoal(content, points, endDate, timesCompleted);
         }
         else if (type == "TimeBoundChecklistGoal")
         {
-            return new TimeBoundChecklistGoal(content, points, finalPoints, maxTimes, endDate);
+            return new TimeBoundChecklistGoal(content, points, finalPoints, maxTimes, endDate, timesCompleted);
         }
         return null;
     }

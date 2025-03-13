@@ -1,6 +1,6 @@
 public class TimeBoundChecklistGoal : ChecklistGoal
 {
-    public TimeBoundChecklistGoal(string content, int points, int finalPoints, int times, DateTime endDate) : base(content, points, finalPoints, times, endDate)
+    public TimeBoundChecklistGoal(string content, int points, int finalPoints, int times, DateTime endDate, int timesCompleated = 0) : base(content, points, finalPoints, times, timesCompleated, endDate)
     {
     }
 

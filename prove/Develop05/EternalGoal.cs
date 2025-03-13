@@ -1,6 +1,6 @@
 public class EternalGoal : TimeBoundRepeatingGoal
 {
-    public EternalGoal(string content, int points) : base(content, points, DateTime.MaxValue)
+    public EternalGoal(string content, int points, int timesCompleated = 0) : base(content, points, DateTime.MaxValue, timesCompleated)
     {
     }
     public override void DisplayGoal()
