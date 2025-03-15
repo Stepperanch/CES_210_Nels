@@ -2,11 +2,11 @@ public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
-    private GoalBuilder Builder = new GoalBuilder();
-    private Anamation Anamation = new Anamation();
+    private GoalBuilder _builder = new GoalBuilder();
+    private Anamation _anamation = new Anamation();
     public void NewGoal()
     {
-        _goals.Add(Builder.BuildGoal());
+        _goals.Add(_builder.BuildGoal());
     }
     public void DisplayGoals()
     {
@@ -51,7 +51,7 @@ public class GoalManager
         _score = Convert.ToInt32(reader.ReadLine());
         while ((line = reader.ReadLine()) != null)
         {
-            _goals.Add(Builder.Deserialize(line));
+            _goals.Add(_builder.Deserialize(line));
         }
     }
     public void SaveGoals()
@@ -61,13 +61,13 @@ public class GoalManager
         writer.WriteLine(_score);
         for (int i = 0; i < _goals.Count; i++)
         {
-            writer.WriteLine(Builder.Serialize(_goals[i]));
+            writer.WriteLine(_builder.Serialize(_goals[i]));
         }
     }
     public void GoalMenu()
     {
         Console.WriteLine("");
-        Anamation.Spiner(2);
+        _anamation.Spiner(2);
         Console.Clear();
         Console.WriteLine("");
         Console.WriteLine("Welcome to the goal Manager");
@@ -98,7 +98,7 @@ public class GoalManager
         else if (choice == 2)
         {
             DisplayGoals();
-            Anamation.PressAnyKeyToContinue();
+            _anamation.PressAnyKeyToContinue();
         }
         else if (choice == 3)
         {
@@ -123,7 +123,7 @@ public class GoalManager
         else if (choice == 7)
         {
             Console.WriteLine("Thank you for using the goal manager.");
-            Anamation.Dashes(2);
+            _anamation.Dashes(2);
             Console.Clear();
             return;
         }
