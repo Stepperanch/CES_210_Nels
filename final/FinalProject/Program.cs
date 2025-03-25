@@ -4,9 +4,22 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine("Welcome to the Event Manager!");
-        Console.ResetColor();
-        Console.WriteLine("What is the date and time of the event? (MM/dd/yy hh:mm tt) (*)");
+        List<Day> days = new List<Day>();
+        for (int i = 0; i < 7 ; i++)
+        {
+            days.Add(new Day(27, 12, 2021).AddDays(i));
+        }
+        D.Clear();
+        foreach (Day day in days)
+        {
+            if (day == days[0])
+            {
+                day.DisplayIn(true);
+            }
+            else
+            {
+                day.DisplayIn();
+            }
+        }
     }
 }
