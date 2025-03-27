@@ -97,4 +97,11 @@ public class D
     {
         Console.SetCursorPosition(x, y);
     }
+    public static void NL(int lines = 1)
+    {
+        for (int i = 0; i < lines; i++)
+        {
+            Console.WriteLine();
+        }
+    }
 }
