@@ -12,9 +12,10 @@ public class Year
     {
         _year = year;
         _dateTime = new DateTime(_year, 1, 1);
-        _fundementalIdentifier = _dateTime.ToString("yyyy");
+        
         if (isYear)
         {
+            _fundementalIdentifier = _dateTime.ToString("yyyy");
             for (int i = 1; i <= 12; i++)
             {
                 _months.Add(new Month(_year, i));
@@ -155,27 +156,31 @@ public class Year
         D.Print("Please select an option: ");
         string input = Console.ReadLine();
 
-        switch (input)
+        if (input == "1")
         {
-            case "1":
-                // ViewMonth();
-                break;
-            case "2":
-                // ViewEvents();
-                break;
-            case "3":
-                D.Clear();
-                D.Print("Returning to Main Menu...");
-                D.Pause();
-                break;
-            default:
-                D.Print("Invalid input. Please try again.");
-                D.Pause();
-                Menu();
-                break;
+            // ViewMonth();
+            Menu();
         }
+        else if (input == "2")
+        {
+            ViewEvents();
+            Menu();
+        }
+        else if (input == "3")
+        {
+            D.Clear();
+            D.Print("Returning to Main Menu...");
+            D.Pause();
+            return;
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+            Menu();
+        }
+        return;
     }
-
     protected virtual void ViewEvents()
     {
         D.Clear();
@@ -194,29 +199,46 @@ public class Year
         D.Print("Please select an option: ");
         string input = Console.ReadLine();
 
-        switch (input)
+        if (input == "1")
         {
-            case "1":
-                // AddEvent();
-                break;
-            case "2":
-                // EditEvent();
-                break;
-            case "3":
-                // DeleteEvent();
-                break;
-            case "4":
-                Menu();
-                break;
-            default:
-                D.Print("Invalid input. Please try again.");
-                D.Pause();
-                ViewEvents();
-                break;
+            AddEvent();
+            ViewEvents();
+        }
+        else if (input == "2")
+        {
+            // EditEvent();
+            ViewEvents();
+        }
+        else if (input == "3")
+        {
+            // DeleteEvent();
+            ViewEvents();
+        }
+        else if (input == "4")
+        {
+            Menu();
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+            ViewEvents();
         }
     }
     public void AddEvent()
     {
-
-    }
+        foreach (Event e in _events)
+        {
+            if (e.GetEvent().Title == "-")
+            {
+                D.Clear();
+                e.CreateEvent();
+                D.Print("Event Created!");
+                return;
+            } 
+        }
+        D.Print("You cannot have more than 4 events, Please Edit or Delete an event");
+        D.Pause();
+        ViewEvents();
+    } 
 }

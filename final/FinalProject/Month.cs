@@ -6,13 +6,13 @@ public class Month : Year
 {
     private List<Day> _days = new List<Day>();
     protected int _month;
-    private List<Event> _events = new List<Event>();
     public Month( int year, int month, bool isMonth = true) : base(year, false)
     {
         _month = month;
         _dateTime = new DateTime(_year, _month, 1);
         if (isMonth)
         {
+            _fundementalIdentifier = _dateTime.ToString("YYYY-MMMM");
             for (int i = 1; i <= DateTime.DaysInMonth(_year, _month); i++)
             {
                 _days.Add(new Day(_year, _month, i));

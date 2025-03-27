@@ -29,7 +29,7 @@ public class Calender
         }
         else if (input == "2")
         {
-            // CreateNewYear();
+            CreateNewYear();
         }
         else if (input == "3")
         {
@@ -49,6 +49,7 @@ public class Calender
             D.Pause();
             Menu();
         }
+        Menu();
     }
     public void ViewYear()
     {
@@ -66,6 +67,7 @@ public class Calender
         if (int.TryParse(input, out int choice) && choice > 0 && choice <= _years.Count)
         {
             _years[choice - 1].Menu();
+            return;
         }
         else if (input == (_years.Count + 1).ToString())
         {
@@ -76,6 +78,31 @@ public class Calender
             D.Print("Invalid input. Please try again.");
             D.Pause();
             ViewYear();
+        }
+    }
+    public void CreateNewYear()
+    {
+        D.Clear();
+        D.Print("Enter the year you want to create (enter 0 to exit): ");
+        string input = Console.ReadLine();
+        if (input == "0")
+        {
+            Menu();
+            return;
+        }
+        if (int.TryParse(input, out int year))
+        {
+            Year newYear = new Year(year);
+            _years.Add(newYear);
+            D.Print($"Year {year} created successfully.");
+            D.Pause();
+            Menu();
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+            CreateNewYear();
         }
     }
 }

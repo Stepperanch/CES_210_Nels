@@ -11,6 +11,11 @@ public class Event
         D.Print("(*) denotes required fields");
         D.Print("What is the title of the event? (*)");
         _title = D.Read();
+        while (_title == "")
+        {
+            D.Print("Title cannot be empty. Please enter a valid title.");
+            _title = D.Read();
+        }
         D.Print("What is the description of the event?");
         _description = D.Read();
         D.Print("What is the Location of the event?");
