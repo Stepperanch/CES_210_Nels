@@ -51,6 +51,13 @@ class Program
         //     D.Pause(1000);
         // }
 
+        D.Print("Welcome to the Calendar App!");
+        D.Print("Please make sure that the window is as large as it can go");
+        D.Pause();
+        D.Clear();
+
+        Calender calender = new Calender();
+        calender.Menu();
         
         
     }

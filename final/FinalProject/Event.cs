@@ -5,10 +5,9 @@ public class Event
     private string _report = "";
     private string _location = "";
     private bool _isReminder = false;
-    public void CreateEvent(DateTime eventTimeObj)
+    public void CreateEvent()
     {
-        string eventTime = eventTimeObj.ToString("MM/dd/yy hh:mm tt");
-        D.Print($"Creating a new event at {eventTime}");
+        D.Print($"Creating a new event");
         D.Print("(*) denotes required fields");
         D.Print("What is the title of the event? (*)");
         _title = D.Read();

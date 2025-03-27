@@ -6,10 +6,13 @@ public class Year
     protected int _year; // The year
     protected DateTime _dateTime; // The date time of the year
     private List<List<List<Event>>> _weekEvents = new List<List<List<Event>>>();
+    protected List<Event> _events = new List<Event>();
+    protected string _fundementalIdentifier;
     public Year(int year, bool isYear = true)   // Constructor
     {
         _year = year;
         _dateTime = new DateTime(_year, 1, 1);
+        _fundementalIdentifier = _dateTime.ToString("yyyy");
         if (isYear)
         {
             for (int i = 1; i <= 12; i++)
@@ -31,6 +34,14 @@ public class Year
             }
             _weekEvents.Add(monthEvents);
         }
+        for (int i = 0; i < 4; i++)
+        {
+            _events.Add(new Event());
+        }
+    }
+    public int GetYear()
+    {
+        return _year;
     }
     public Month GetMonth(int whichMohth)   // Get a month
     {
@@ -112,8 +123,7 @@ public class Year
         }
         return (week, events, monthNumber, weekNumber);
     }
-
-    public void Desplay()
+    private void Display()
     {
         D.Clear();
         D.Print(_year.ToString());
@@ -127,6 +137,86 @@ public class Year
                 k++;
             }
         }
-        
+        D.Print("Events This Year:");
+        for (int i = 0; i < _events.Count; i++)
+        {
+            Event e = _events[i];
+            D.Print((i + 1).ToString() + " " + e.GetEvent().Title);
+        }
+        D.NL();
+    }
+    public void Menu()
+    {
+        Display();
+        D.Print("1. View Month");
+        D.Print("2. View Events This Year");
+        D.Print("3. Return To Main Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+
+        switch (input)
+        {
+            case "1":
+                // ViewMonth();
+                break;
+            case "2":
+                // ViewEvents();
+                break;
+            case "3":
+                D.Clear();
+                D.Print("Returning to Main Menu...");
+                D.Pause();
+                break;
+            default:
+                D.Print("Invalid input. Please try again.");
+                D.Pause();
+                Menu();
+                break;
+        }
+    }
+
+    protected virtual void ViewEvents()
+    {
+        D.Clear();
+        D.Print($"Events In {_fundementalIdentifier}:");
+        for (int i = 0; i < _events.Count; i++)
+        {
+            Event e = _events[i];
+            D.Print((i + 1).ToString() + " " + e.GetEvent().Title);
+        }
+        D.NL();
+        D.Print("1. Add Event");
+        D.Print("2. Edit Event");
+        D.Print("3. Delete Event");
+        D.Print("4. Return to Year Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+
+        switch (input)
+        {
+            case "1":
+                // AddEvent();
+                break;
+            case "2":
+                // EditEvent();
+                break;
+            case "3":
+                // DeleteEvent();
+                break;
+            case "4":
+                Menu();
+                break;
+            default:
+                D.Print("Invalid input. Please try again.");
+                D.Pause();
+                ViewEvents();
+                break;
+        }
+    }
+    public void AddEvent()
+    {
+
     }
 }

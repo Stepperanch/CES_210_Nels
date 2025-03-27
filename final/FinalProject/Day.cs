@@ -29,7 +29,7 @@ public class Day : Month
             D.Print((i + 1).ToString() + " " + e.GetEvent().Title);
         }
     }
-    public void DisplayIn(bool first = false)
+    public void DisplayIn(bool first = false) // size is 23 char wide and 37 lines high
     {
         if (first)
         {
