@@ -57,7 +57,19 @@ class Program
         D.Clear();
 
         Calender calender = new Calender();
-        calender.Menu();
+        Year year2025 = new Year(2025);
+        (List<Day> week, List<Event> events, int start, int end) = year2025.GetWeek(11, 1);
+        foreach (Day day in week)
+        {
+            if (day == week[0])
+            {
+                day.DisplayIn(true);
+            }
+            else
+            {
+                day.DisplayIn();
+            }
+        }
         
         
     }

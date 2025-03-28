@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Tracing;
 
 public class Year
@@ -48,7 +49,6 @@ public class Year
     {
         return _months[whichMohth - 1];
     }
-
     public (List<Day> week, List<Event> eventsThisWeek, int newMonthNumber, int newWeekNumber) GetWeek(int monthNumber, int weekNumber)
     {
         List<Event> events = _weekEvents[monthNumber-1][weekNumber-1];
@@ -62,7 +62,7 @@ public class Year
             {
                 if (monthNumber == 1) // If it is jan, just desplay from jan 1st to the first sunday
                 {
-                    while (searchDay.DayOfWeek != DayOfWeek.Monday)
+                    while (searchDay.DayOfWeek != DayOfWeek.Sunday)
                     {
                         searchDay = searchDay.AddDays(1);
                     }
@@ -74,7 +74,7 @@ public class Year
                 }
                 return GetWeek(monthNumber - 1, GetMonth(monthNumber - 1).MondaysInMonth()+1); // Get the last week of the previous month
             }
-            while (searchDay.DayOfWeek != DayOfWeek.Monday)
+            while (searchDay.DayOfWeek != DayOfWeek.Sunday)
             {
                 searchDay = searchDay.AddDays(1);
             }
@@ -138,6 +138,7 @@ public class Year
                 k++;
             }
         }
+        D.NL();
         D.Print("Events This Year:");
         for (int i = 0; i < _events.Count; i++)
         {
@@ -149,7 +150,7 @@ public class Year
     public void Menu()
     {
         Display();
-        D.Print("1. View Month");
+        D.Print("1. View Month (Not Implemented)");
         D.Print("2. View Events This Year");
         D.Print("3. Return To Main Menu");
         D.NL();
@@ -159,27 +160,39 @@ public class Year
         if (input == "1")
         {
             // ViewMonth();
-            Menu();
         }
         else if (input == "2")
         {
             ViewEvents();
-            Menu();
         }
         else if (input == "3")
         {
             D.Clear();
             D.Print("Returning to Main Menu...");
-            D.Pause();
+            D.Pause(200);
             return;
         }
         else
         {
             D.Print("Invalid input. Please try again.");
             D.Pause();
-            Menu();
         }
-        return;
+        Menu();
+    }
+    protected void ViewMonth()
+    {
+        D.Clear();
+        D.Print("Select a month to view:");
+        for (int i = 0; i < _months.Count; i++)
+        {
+            // D.Print($"{i + 1}. {_months[i].GetMonth()}");
+        }
+        D.Print($"{_months.Count + 1}. Back to Year Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+
+        // if 
     }
     protected virtual void ViewEvents()
     {
@@ -188,7 +201,9 @@ public class Year
         for (int i = 0; i < _events.Count; i++)
         {
             Event e = _events[i];
-            D.Print((i + 1).ToString() + " " + e.GetEvent().Title);
+            D.Print((i + 1).ToString());
+            e.DisplayEvent();
+            D.NL();
         }
         D.NL();
         D.Print("1. Add Event");
@@ -202,30 +217,30 @@ public class Year
         if (input == "1")
         {
             AddEvent();
-            ViewEvents();
         }
         else if (input == "2")
         {
-            // EditEvent();
-            ViewEvents();
+            EditEvent();
         }
         else if (input == "3")
         {
-            // DeleteEvent();
-            ViewEvents();
+            DeleteEvent();
         }
         else if (input == "4")
         {
-            Menu();
+            D.Clear();
+            D.Print("Returning to Year Menu...");
+            D.Pause(200);
+            return;
         }
         else
         {
             D.Print("Invalid input. Please try again.");
             D.Pause();
-            ViewEvents();
         }
+        ViewEvents();
     }
-    public void AddEvent()
+    protected virtual void AddEvent()
     {
         foreach (Event e in _events)
         {
@@ -241,4 +256,86 @@ public class Year
         D.Pause();
         ViewEvents();
     } 
+    protected virtual void EditEvent()
+    {
+        D.Clear();
+        D.Print("Select an event to edit:\n");
+        int tempvalue = 0;
+        for (int i = 0; i < _events.Count; i++)
+        {
+            Event e = _events[i];
+            if (e.GetEvent().Title != "-")
+            {
+                D.Print("Event " + (i + 1).ToString());
+                e.DisplayEvent();
+                D.NL();
+            }
+            tempvalue = i+2;
+        }
+        D.Print($"{tempvalue}. Return to Year Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+        if (input == (tempvalue).ToString())
+        {
+            D.Clear();
+            D.Print("Returning to Year Menu...");
+            D.Pause(200);
+            return;
+        }
+        if (int.TryParse(input, out int choice) && choice > 0 && choice <= _events.Count)
+        {
+            _events[choice - 1].EditEvent();
+            D.Print("Event Edited!");
+            D.Pause();
+            return;
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+        }
+        EditEvent();
+    }
+    protected virtual void DeleteEvent()
+    {
+        D.Clear();
+        D.Print("Select an event to delete:\n");
+        int tempvalue = 0;
+        for (int i = 0; i < _events.Count; i++)
+        {
+            Event e = _events[i];
+            if (e.GetEvent().Title != "-")
+            {
+                D.Print("Event " + (i + 1).ToString());
+                e.DisplayEvent();
+                D.NL();
+            }
+            tempvalue = i+2;
+        }
+        D.Print($"{tempvalue}. Return to Year Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+        if (input == (tempvalue).ToString())
+        {
+            D.Clear();
+            D.Print("Returning to Year Menu...");
+            D.Pause(200);
+            return;
+        }
+        if (int.TryParse(input, out int choice) && choice > 0 && choice <= _events.Count)
+        {
+            _events[choice - 1].DeleteEvent();
+            D.Print("Event Deleted!");
+            D.Pause();
+            return;
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+        }
+        DeleteEvent();
+    }
 }

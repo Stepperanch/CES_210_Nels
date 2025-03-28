@@ -16,8 +16,8 @@ public class Calender
         D.NL();
         D.Print("1. View Year");
         D.Print("2. Create New Year");
-        D.Print("3. Save Year");
-        D.Print("4. Load Year");
+        D.Print("3. Save Year (not implemented)");
+        D.Print("4. Load Year (not implemented)");
         D.Print("5. Exit");
         D.NL();
         D.Print("Please select an option: ");
@@ -41,13 +41,26 @@ public class Calender
         }
         else if (input == "5")
         {
-            Environment.Exit(0);
+            D.Clear();
+            D.Print("WARNING, if you have not saved your work, it will be lost.");
+            D.Print("Are you sure you want to exit? (y/n)");
+            string exitInput = Console.ReadLine();
+            if (exitInput == "y")
+            {
+                D.Print("Exiting...");
+                D.Pause(200);
+                Environment.Exit(0);
+            }
+            else
+            {
+                D.Print("Returning to Main Menu...");
+                D.Pause(1000);
+            }
         }
         else
         {
             D.Print("Invalid input. Please try again.");
             D.Pause();
-            Menu();
         }
         Menu();
     }
@@ -71,14 +84,17 @@ public class Calender
         }
         else if (input == (_years.Count + 1).ToString())
         {
-            Menu();
+            D.Clear();
+            D.Print("Returning to Main Menu...");
+            D.Pause(1000);
+            return;
         }
         else
         {
             D.Print("Invalid input. Please try again.");
             D.Pause();
-            ViewYear();
         }
+        ViewYear();
     }
     public void CreateNewYear()
     {
@@ -87,7 +103,9 @@ public class Calender
         string input = Console.ReadLine();
         if (input == "0")
         {
-            Menu();
+            D.Clear();
+            D.Print("Returning to Main Menu...");
+            D.Pause(1000);
             return;
         }
         if (int.TryParse(input, out int year))
@@ -96,13 +114,13 @@ public class Calender
             _years.Add(newYear);
             D.Print($"Year {year} created successfully.");
             D.Pause();
-            Menu();
+            return;
         }
         else
         {
             D.Print("Invalid input. Please try again.");
             D.Pause();
-            CreateNewYear();
         }
+        CreateNewYear();
     }
 }

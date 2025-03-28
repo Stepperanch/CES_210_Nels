@@ -1,12 +1,12 @@
 public class Day : Month
 {
-    List<Event> _events = new List<Event>();
     List<Event> _dayEvents = new List<Event>();
     private int _day;
     public Day(int year, int month, int day) : base(year, month, false)
     {
         _day = day;
         _dateTime = new DateTime(_year, _month, _day);
+        _fundementalIdentifier = _dateTime.ToString("dddd-MMMM-dd-yyyy");
         for (int i = 0; i < 34; i++)
         {
             _events.Add(new Event());
@@ -62,12 +62,12 @@ public class Day : Month
             var (x , y) = D.GetCursorPosition();
             if (_dateTime.Day == 1)
             {
-                D.SetCursorPosition(x-2, y-36);
+                D.SetCursorPosition(x-2, y-40);
                 D.Print("| " + _dateTime.ToString("MMMM"));
-                D.SetCursorPosition(x-2, y-35);
+                D.SetCursorPosition(x-2, y-39);
                 D.Print("| ");
             }
-            D.SetCursorPosition(x, y-34);
+            D.SetCursorPosition(x, y-38);
             D.Print(_dateTime.Day.ToString().PadRight(3) + _dateTime.ToString("dddd").PadRight(17) + " | ", false);
         
             for (int i = 0; i < _events.Count; i++)

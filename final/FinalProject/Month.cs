@@ -12,15 +12,11 @@ public class Month : Year
         _dateTime = new DateTime(_year, _month, 1);
         if (isMonth)
         {
-            _fundementalIdentifier = _dateTime.ToString("YYYY-MMMM");
+            _fundementalIdentifier = _dateTime.ToString("MMMM-yyyy");
             for (int i = 1; i <= DateTime.DaysInMonth(_year, _month); i++)
             {
                 _days.Add(new Day(_year, _month, i));
             }
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            _events.Add(new Event());
         }
     }
 
@@ -113,5 +109,22 @@ public class Month : Year
             line++;
         }
         
+    }
+    public void DisplayLarge()
+    {
+        D.Clear();
+        D.Print("     " + _dateTime.ToString("MMMM"));
+        D.Print("");
+        //       | 12345678900987654321 | 12345678900987654321 | 12345678900987654321 | 12345678900987654321 | 12345678900987654321 | 12345678900987654321 | 12345678900987654321 |
+        D.Print("|        Monday        |        Tuesday       |       Wednesday      |       Thursday       |        Friday        |        Saturday      |         Sunday       |");
+        var (x, y) = D.GetCursorPosition();
+        D.SetCursorPosition(x, y+1);
+        int firstDayValue = ((int)_dateTime.DayOfWeek + 6) % 7 + 1;
+        for (int i = 1; i <= firstDayValue; i++)
+        {
+            D.Print("|                     |", false);
+        }
+               
+
     }
 }
