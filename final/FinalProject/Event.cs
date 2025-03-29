@@ -8,9 +8,16 @@ public class Event
     private string _location = "";
     private bool _isReminder = false;
     private bool _isReminderQuestion = false;
-    public void CreateEvent(bool reminderQuestion = false)
+    public void CreateEvent(bool reminderQuestion = false, DateTime date = default)
     {
-        D.Print($"Creating a new event");
+        if (date == default)
+        {
+            D.Print($"Creating a new event");
+        }
+        else
+        {
+            D.Print($"Creating a new event at {date.ToString("hh:mm tt")}");
+        }
         D.Print("(*) denotes required fields");
         D.Print("What is the title of the event? (*)");
         _title = D.Read();
@@ -38,7 +45,7 @@ public class Event
     {
         return (_title, _description, _location, _report, _isReminder);
     }
-    public void DisplayEvent()
+    public void DisplayEvent(bool standalone = false)
     {
         Console.WriteLine($"Title: {_title}");
         if (_description != "")
@@ -56,6 +63,10 @@ public class Event
         if (_isReminder)
         {
             D.Print("Reminder set for 30 minutes before the event");
+        }
+        if (standalone)
+        {
+        D.Pause();
         }
     }
     public void EditEvent()

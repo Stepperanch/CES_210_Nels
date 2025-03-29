@@ -2,7 +2,7 @@ using System.Text.Json;
 
 public static class Serializer
 {
-    public static void JsonSerialize(Year year, string filePath = "")
+    public static string JsonSerialize(Year year, string filePath = "")
     {
         if (filePath == "")
         {
@@ -10,9 +10,10 @@ public static class Serializer
         }
         using (StreamWriter writer = new StreamWriter(filePath))
         {
-            string json = JsonSerializer.Serialize(year);
-            writer.Write(json);
+            string jsonString = JsonSerializer.Serialize(year, new JsonSerializerOptions { WriteIndented = true });
+            writer.Write(jsonString);
         }
+        return filePath;
     }
     public static Year JsonDeserialize(string filePath = "")
     {
@@ -22,7 +23,7 @@ public static class Serializer
         }
         if (!File.Exists(filePath))
         {
-            throw new FileNotFoundException($"File not found: {filePath}");
+            return null;
         }
         using (StreamReader reader = new StreamReader(filePath))
         {
@@ -40,7 +41,7 @@ public static class Serializer
         }
         if (!File.Exists(filePath))
         {
-            throw new FileNotFoundException($"File not found: {filePath}");
+            return null;
         }
         using (StreamReader reader = new StreamReader(filePath))
         {
@@ -48,6 +49,5 @@ public static class Serializer
             Year year = JsonSerializer.Deserialize<Year>(json);
             return year;
         }
-    }
-        
+    }       
 }

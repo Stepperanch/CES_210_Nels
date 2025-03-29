@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 public class Calender
@@ -33,11 +34,11 @@ public class Calender
         }
         else if (input == "3")
         {
-            // SaveYear();
+            SaveYear();
         }
         else if (input == "4")
         {
-            // LoadYear();
+            LoadYear();
         }
         else if (input == "5")
         {
@@ -64,7 +65,7 @@ public class Calender
         }
         Menu();
     }
-    public void ViewYear()
+    private void ViewYear()
     {
         D.Clear();
         D.Print("Select a year to view:");
@@ -96,7 +97,7 @@ public class Calender
         }
         ViewYear();
     }
-    public void CreateNewYear()
+    private void CreateNewYear()
     {
         D.Clear();
         D.Print("Enter the year you want to create (enter 0 to exit): ");
@@ -108,7 +109,7 @@ public class Calender
             D.Pause(1000);
             return;
         }
-        if (int.TryParse(input, out int year))
+        if (int.TryParse(input, out int year) && year > 0 && year <= 9999)
         {
             Year newYear = new Year(year);
             _years.Add(newYear);
@@ -122,5 +123,93 @@ public class Calender
             D.Pause();
         }
         CreateNewYear();
+    }
+    private void SaveYear()
+    {
+        D.Clear();
+        D.Print("Select a year to save:");
+        for (int i = 0; i < _years.Count; i++)
+        {
+            D.Print($"{i + 1}. {_years[i].GetYear()}");
+        }
+        D.Print($"{_years.Count + 1}. Back to Main Menu");
+        D.NL();
+        D.Print("Please select an option: ");
+        string input = Console.ReadLine();
+        if (int.TryParse(input, out int choice) && choice > 0 && choice <= _years.Count)
+        {
+            Year yearToSave = _years[choice - 1];
+            D.Print("What would you like to name the file?");
+            D.Print("Please enter the name of the file (without extension): ");
+            D.Print($"Default name is year{yearToSave.GetYear()}");
+            string fileName = D.Read();
+
+            string filepath = Serializer.JsonSerialize(yearToSave, fileName);
+
+            D.Print($"Year {yearToSave.GetYear()} saved successfully to {filepath}");
+            D.Pause();
+            return;
+        }
+        else if (input == (_years.Count + 1).ToString())
+        {
+            D.Clear();
+            D.Print("Returning to Main Menu...");
+            D.Pause(1000);
+            return;
+        }
+        else
+        {
+            D.Print("Invalid input. Please try again.");
+            D.Pause();
+        }
+        SaveYear();
+    }
+    private void LoadYear()
+    {
+        D.Clear();
+        D.Print("Enter the name of the file (without extension) or the int name of the year to load");
+        D.Print($"Default year is {DateTime.Now.Year}");
+        D.Print("Enter 0 to exit");
+        string fileName = D.Read();
+        if (fileName == "0")
+        {
+            D.Clear();
+            D.Print("Returning to Main Menu...");
+            D.Pause(1000);
+            return;
+        }
+        else if (int.TryParse(fileName, out int year) && year > 0 && year <= 9999)
+        {
+            Year loadedYear = Serializer.JsonDeserialize(year);
+            if (loadedYear != null)
+            {
+                _years.Add(loadedYear);
+                D.Print($"Year {loadedYear.GetYear} loaded successfully.");
+                D.Pause();
+                return;
+            }
+            else
+            {
+                D.Print("Failed to load the year. Please try again.");
+                D.Pause();
+            }
+        }
+        else 
+        {
+            Year loadedYear = Serializer.JsonDeserialize(fileName);
+            if (loadedYear != null)
+            {
+                _years.Add(loadedYear);
+                D.Print($"Year {loadedYear.GetYear} loaded successfully.");
+                D.Pause();
+                return;
+            }
+            else
+            {
+                D.Print("Failed to load the year. Please try again.");
+                D.Pause();
+            }
+        }
+        LoadYear();
     }
 }
