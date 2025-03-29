@@ -1,13 +1,18 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.VisualBasic.FileIO;
+using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public class Event
 {
-    private string _title = "-";
-    private string _description = "";
-    private string _report = "";
-    private string _location = "";
-    private bool _isReminder = false;
-    private bool _isReminderQuestion = false;
+    [JsonInclude] private string _title = "-";
+    [JsonInclude] private string _description = "";
+    [JsonInclude] private string _report = "";
+    [JsonInclude] private string _location = "";
+    [JsonInclude] private bool _isReminder = false;
+    [JsonInclude]private bool _isReminderQuestion = false;
+    public Event() { } // Needed for JsonSerializer
     public void CreateEvent(bool reminderQuestion = false, DateTime date = default)
     {
         if (date == default)

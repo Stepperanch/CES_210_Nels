@@ -1,11 +1,14 @@
 using System.ComponentModel;
 using System.Dynamic;
 using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public class Month : Year
 {
-    private List<Day> _days = new List<Day>();
-    protected int _month;
+    [JsonInclude] private List<Day> _days = new List<Day>();
+    [JsonInclude] protected int _month;
+    public Month() { } // Needed for JsonSerializer
     public Month( int year, int month, bool isMonth = true) : base(year, false)
     {
         _month = month;
@@ -19,7 +22,6 @@ public class Month : Year
             }
         }
     }
-
     public Day GetDay(int day)
     {
         return _days[day - 1];

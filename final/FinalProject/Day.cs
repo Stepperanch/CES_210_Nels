@@ -1,10 +1,13 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public class Day : Month
 {
-    List<Event> _dayEvents = new List<Event>();
-    private int _day;
+    [JsonInclude] List<Event> _dayEvents = new List<Event>();
+    [JsonInclude] private int _day;
+    public Day() { } // Needed for JsonSerializer
     public Day(int year, int month, int day) : base(year, month, false)
     {
         _day = day;

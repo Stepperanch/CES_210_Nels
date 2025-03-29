@@ -2,6 +2,11 @@ using System.Text.Json;
 
 public static class Serializer
 {
+    private static readonly JsonSerializerOptions _options = new JsonSerializerOptions
+    {
+        WriteIndented = true,
+        IncludeFields = true // Ensures private fields with [JsonInclude] are serialized
+    };
     public static string JsonSerialize(Year year, string filePath = "")
     {
         if (filePath == "")

@@ -1,14 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Tracing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public class Year
 {
-    private List<Month> _months = new List<Month>(); // List of months in the year
-    protected int _year; // The year
-    protected DateTime _dateTime; // The date time of the year
-    private List<List<List<Event>>> _weekEvents = new List<List<List<Event>>>();
-    protected List<Event> _events = new List<Event>();
-    protected string _fundementalIdentifier;
+    [JsonInclude] private List<Month> _months = new List<Month>(); // List of months in the year
+    [JsonInclude] protected int _year; // The year
+    [JsonInclude] protected DateTime _dateTime; // The date time of the year
+    [JsonInclude] private List<List<List<Event>>> _weekEvents = new List<List<List<Event>>>();
+    [JsonInclude] protected List<Event> _events = new List<Event>();
+    [JsonInclude] protected string _fundementalIdentifier;
+    public Year() { } // Needed for JsonSerializer
     public List<Event> Events // Just experimenting with properties i understand that this is not the best practice
     {
         get { return _events; }
