@@ -17,8 +17,8 @@ public class Calender
         D.NL();
         D.Print("1. View Year");
         D.Print("2. Create New Year");
-        D.Print("3. Save Year (not implemented)");
-        D.Print("4. Load Year (not implemented)");
+        D.Print("3. Save Year");
+        D.Print("4. Load Year");
         D.Print("5. Exit");
         D.NL();
         D.Print("Please select an option: ");
